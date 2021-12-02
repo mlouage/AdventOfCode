@@ -54,7 +54,7 @@ public class Tests
 
         var actual = sut.Part1(test);
 
-        Assert.Equal(7, actual);
+        Assert.Equal(150, actual);
 
         var input = await File.ReadAllTextAsync("Day02\\Data\\input.txt");
         var solution = sut.Part1(input);
@@ -70,7 +70,7 @@ public class Tests
 
         var actual = sut.Part2(test);
 
-        Assert.Equal(5, actual);
+        Assert.Equal(900, actual);
 
         var input = await File.ReadAllTextAsync("Day02\\Data\\input.txt");
         var solution = sut.Part2(input);
