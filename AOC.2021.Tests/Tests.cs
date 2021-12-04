@@ -109,4 +109,40 @@ public class Tests
 
         _output.WriteLine($"Day 03 (Part 2): {solution}");
     }
+
+    [Fact]
+    public async Task Day04Part1Test()
+    {
+        var test_numbers = await File.ReadAllTextAsync("Day04\\test_numbers.txt");
+        var test_input = await File.ReadAllLinesAsync("Day04\\test_input.txt");
+        var sut = new Days.Day04();
+
+        var actual = sut.Part1(test_numbers, test_input);
+
+        Assert.Equal(4512, actual);
+
+        var numbers = await File.ReadAllTextAsync("Day04\\numbers.txt");
+        var input = await File.ReadAllLinesAsync("Day04\\input.txt");
+        var solution = sut.Part1(numbers, input);
+
+        _output.WriteLine($"Day 04 (Part 1): {solution}");
+    }
+
+    [Fact]
+    public async Task Day04Part2Test()
+    {
+        var test_numbers = await File.ReadAllTextAsync("Day04\\test_numbers.txt");
+        var test_input = await File.ReadAllLinesAsync("Day04\\test_input.txt");
+        var sut = new Days.Day04();
+
+        var actual = sut.Part2(test_numbers, test_input);
+
+        Assert.Equal(1924, actual);
+
+        var numbers = await File.ReadAllTextAsync("Day04\\numbers.txt");
+        var input = await File.ReadAllLinesAsync("Day04\\input.txt");
+        var solution = sut.Part2(numbers, input);
+
+        _output.WriteLine($"Day 04 (Part 1): {solution}");
+    }
 }
