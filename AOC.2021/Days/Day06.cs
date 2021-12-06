@@ -4,36 +4,55 @@ public class Day06
 {
     public int Part1(string input)
     {
-        var items = input
+        var values = input
             .Split(",", StringSplitOptions.RemoveEmptyEntries)
-            .Select(n => int.Parse(n))
-            .ToList();
+            .Select(n => int.Parse(n));
+
+        var fishes = new int[9];
+
+        foreach(var fish in values)
+        {
+            fishes[fish] += 1;
+        }
 
         for (int i = 1; i <= 80; i ++)
         {
-            var fish = items.Select(f => f--).ToList();
-            var newFish = fish.Count(f => f == 0);
-            for (int j = 1; j <= newFish; j++)
+            var zero = fishes[0];
+            for (int j = 1; j <= 8; j++)
             {
-                fish.Append(8);
-
+                fishes[j - 1] = fishes[j];
             }
-            for (int k = 0; k <= fish.Count() - 1; k++)
-            {
-                if (fish[k] == 0)
-                {
-                    fish[k] = 6;
-                }
-            }
-
-            items = fish;
+            fishes[6] += zero;
+            fishes[8] = zero;
         }
 
-        return items.Sum();
+        return fishes.Sum();
     }
 
-    public int Part2(string[] input)
+    public long Part2(string input)
     {
-        throw new NotImplementedException();
+        var values = input
+            .Split(",", StringSplitOptions.RemoveEmptyEntries)
+            .Select(n => long.Parse(n));
+
+        var fishes = new long[9];
+
+        foreach (var fish in values)
+        {
+            fishes[fish] += 1;
+        }
+
+        for (int i = 1; i <= 256; i++)
+        {
+            var zero = fishes[0];
+            for (int j = 1; j <= 8; j++)
+            {
+                fishes[j - 1] = fishes[j];
+            }
+            fishes[6] += zero;
+            fishes[8] = zero;
+        }
+
+        return fishes.Sum();
     }    
 }

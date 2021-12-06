@@ -182,14 +182,14 @@ public class Tests
     [Fact]
     public async Task Day06Part1Test()
     {
-        var test = await File.ReadAllTextAsync("Day06/test.txt");
+        var test = await File.ReadAllTextAsync("Day06\\test.txt");
         var sut = new Days.Day06();
 
         var actual = sut.Part1(test);
 
         Assert.Equal(5934, actual); // after 80 days
 
-        var input = await File.ReadAllTextAsync("Day06/input.txt");
+        var input = await File.ReadAllTextAsync("Day06\\input.txt");
         var solution = sut.Part1(input);
 
         _output.WriteLine($"Day 06 (Part 1): {solution}");
@@ -198,14 +198,14 @@ public class Tests
     [Fact]
     public async Task Day06Part2Test()
     {
-        var test = await File.ReadAllLinesAsync("Day06\\test.txt");
-        var sut = new Days.Day05();
+        var test = await File.ReadAllTextAsync("Day06\\test.txt");
+        var sut = new Days.Day06();
 
         var actual = sut.Part2(test);
 
-        Assert.Equal(0, actual);
+        Assert.Equal(26984457539, actual);
 
-        var input = await File.ReadAllLinesAsync("Day06\\input.txt");
+        var input = await File.ReadAllTextAsync("Day06\\input.txt");
         var solution = sut.Part2(input);
 
 
