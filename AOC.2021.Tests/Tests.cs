@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
+using AOC._2021.Days;
 
 namespace AOC._2021.Tests;
 
@@ -242,5 +243,61 @@ public class Tests
         var solution = sut.Part2(input);
 
         _output.WriteLine($"Day 07 (Part 2): {solution}");
+    }
+
+    [Fact]
+    public async Task Day08Part1Test()
+    {
+        var test = await File.ReadAllLinesAsync("Day08\\test.txt");
+        var sut = new Days.Day08();
+
+        var actual = sut.Part1(test);
+
+        Assert.Equal(26, actual);
+
+        var input = await File.ReadAllLinesAsync("Day08\\input.txt");
+        var solution = sut.Part1(input);
+
+        _output.WriteLine($"Day 08 (Part 1): {solution}");
+    }
+
+    [Fact]
+    public async Task Day08Part2Test()
+    {
+        var test = await File.ReadAllLinesAsync("Day08\\test.txt");
+        var sut = new Days.Day08();
+
+        var actual = sut.Part2(test);
+
+        Assert.Equal(61229, actual);
+
+        var input = await File.ReadAllLinesAsync("Day08\\input.txt");
+        var solution = sut.Part2(input);
+
+        _output.WriteLine($"Day 08 (Part 2): {solution}");
+    }
+
+    [Theory]
+    [InlineData('b', true)]
+    [InlineData('s', false)]
+    public void Day08ExtensionsInTest(char input, bool expected)
+    {
+        var collection = "abcdef".ToCharArray();       
+
+        var actual = input.In(collection);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new[] { 'd', 'e', 'f', 'a', 'b', 'c' }, true)]
+    [InlineData(new[] { 'd', 'e', 'f', 'a', 'b', 'g' }, false)]
+    public void Day08ExtensionsAllInTest(char[] input, bool expected)
+    {
+        var collection = "abcdef".ToCharArray();
+
+        var actual = input.AllIn(collection);
+
+        Assert.Equal(expected, actual);
     }
 }
