@@ -300,4 +300,36 @@ public class Tests
 
         Assert.Equal(expected, actual);
     }
+
+    [Fact]
+    public async Task Day09Part1Test()
+    {
+        var test = await File.ReadAllLinesAsync("Day09\\test.txt");
+        var sut = new Days.Day09();
+
+        var actual = sut.Part1(test);
+
+        Assert.Equal(15, actual);
+
+        var input = await File.ReadAllLinesAsync("Day09\\input.txt");
+        var solution = sut.Part1(input);
+
+        _output.WriteLine($"Day 09 (Part 1): {solution}");
+    }
+
+    [Fact]
+    public async Task Day09Part2Test()
+    {
+        var test = await File.ReadAllLinesAsync("Day09\\test.txt");
+        var sut = new Days.Day09();
+
+        var actual = sut.Part2(test);
+
+        Assert.Equal(1134, actual);
+
+        var input = await File.ReadAllLinesAsync("Day09\\input.txt");
+        var solution = sut.Part2(input);
+
+        _output.WriteLine($"Day 09 (Part 2): {solution}");
+    }
 }
