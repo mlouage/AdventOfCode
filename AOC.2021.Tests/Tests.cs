@@ -364,4 +364,36 @@ public class Tests
 
         _output.WriteLine($"Day 10 (Part 2): {solution}");
     }
+
+    [Fact]
+    public async Task Day11Part1Test()
+    {
+        var test = await File.ReadAllLinesAsync("Day11\\test.txt");
+        var sut = new Days.Day11();
+
+        var actual = sut.Part1(test, 100);
+
+        Assert.Equal(1656, actual);
+
+        var input = await File.ReadAllLinesAsync("Day11\\input.txt");
+        var solution = sut.Part1(input, 100);
+
+        _output.WriteLine($"Day 11 (Part 1): {solution}");
+    }
+
+    [Fact]
+    public async Task Day11Part2Test()
+    {
+        var test = await File.ReadAllLinesAsync("Day11\\test.txt");
+        var sut = new Days.Day11();
+
+        var actual = sut.Part2(test, 1000);
+
+        Assert.Equal(195, actual);
+
+        var input = await File.ReadAllLinesAsync("Day11\\input.txt");
+        var solution = sut.Part2(input, 1000);
+
+        _output.WriteLine($"Day 11 (Part 2): {solution}");
+    }
 }
