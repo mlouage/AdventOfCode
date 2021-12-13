@@ -5,8 +5,8 @@ namespace AOC._2021.Days;
 public class Day12
 {
 
-    public Path CreatePath(Node node, bool part2 = false) => part2 ? new Path2(node) : new Path(node);
-    public Path CreatePath(Path path, Node node, bool part2 = false) => part2 ? new Path2(path, node) : new Path(path, node);
+    public PathWithSmallCavesMaxVisitOnce CreatePath(Node node, bool smallCaveMoreThanOnce = false) => smallCaveMoreThanOnce ? new PathWithSmallCaveTwiceOthersOnce(node) : new PathWithSmallCavesMaxVisitOnce(node);
+    public PathWithSmallCavesMaxVisitOnce CreatePath(PathWithSmallCavesMaxVisitOnce path, Node node, bool smallCaveMoreThanOnce = false) => smallCaveMoreThanOnce ? new PathWithSmallCaveTwiceOthersOnce(path, node) : new PathWithSmallCavesMaxVisitOnce(path, node);
 
     public int Part1(string[] input)
     {
@@ -19,15 +19,15 @@ public class Day12
     public int Part2(string[] input)
     {
         var graph = Graph.Create(input);
-        var paths = Traverse(graph, part2: true).ToList();
+        var paths = Traverse(graph, smallCaveMoreThanOnce: true).ToList();
 
         return paths.Count;
     }
 
-    private IEnumerable<Path> Traverse(Graph graph, bool part2 = false)
+    private IEnumerable<PathWithSmallCavesMaxVisitOnce> Traverse(Graph graph, bool smallCaveMoreThanOnce = false)
     {
-        var path = CreatePath(graph.Nodes["start"], part2);
-        var paths = new Queue<Path>();
+        var path = CreatePath(graph.Nodes["start"], smallCaveMoreThanOnce);
+        var paths = new Queue<PathWithSmallCavesMaxVisitOnce>();
         paths.Enqueue(path);
 
         while (paths.Any())
@@ -37,22 +37,22 @@ public class Day12
             foreach (var n in lastNode.GetConnectedNodes())
             {
                 if (n.Name == "end")
-                    yield return CreatePath(current, n, part2);
+                    yield return CreatePath(current, n, smallCaveMoreThanOnce);
                 else if (current.CanVisit(n))
-                    paths.Enqueue(CreatePath(current, n, part2));
+                    paths.Enqueue(CreatePath(current, n, smallCaveMoreThanOnce));
             }
         }
     }
 
-    public class Path
+    public class PathWithSmallCavesMaxVisitOnce
     {
-        public Path(Node startNode)
+        public PathWithSmallCavesMaxVisitOnce(Node startNode)
         {
             Visited = new() { [startNode] = 1 };
             Nodes = new() { startNode };
         }
 
-        public Path(Path path, Node node)
+        public PathWithSmallCavesMaxVisitOnce(PathWithSmallCavesMaxVisitOnce path, Node node)
         {
             Visited = new Dictionary<Node, int>(path.Visited);
             Nodes = new List<Node>(path.Nodes)
@@ -77,15 +77,15 @@ public class Day12
         }
     }
 
-    public class Path2 : Path
+    public class PathWithSmallCaveTwiceOthersOnce : PathWithSmallCavesMaxVisitOnce
     {
-        public Path2(Node startNode) : base(startNode)
+        public PathWithSmallCaveTwiceOthersOnce(Node startNode) : base(startNode)
         {
         }
 
-        public Path2(Path path, Node node) : base(path, node)
+        public PathWithSmallCaveTwiceOthersOnce(PathWithSmallCavesMaxVisitOnce path, Node node) : base(path, node)
         {
-            if (path is Path2 p)
+            if (path is PathWithSmallCaveTwiceOthersOnce p)
             {
                 visitedSmallCaveTwice = p.visitedSmallCaveTwice;
             }
