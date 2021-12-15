@@ -1,4 +1,6 @@
-﻿namespace AOC._2021.Days;
+﻿using static AOC._2021.Days.Day11;
+
+namespace AOC._2021.Days;
 
 public class Day11
 {
@@ -13,6 +15,12 @@ public class Day11
         (1, 0),
         (1, 1),
     };
+
+    public record struct Cell
+    {
+        public int Row;
+        public int Column;
+    }
 
     public int Part1(string[] input, int steps)
     {
@@ -156,8 +164,8 @@ public static class Day11Extensions
 
     public static IEnumerable<Cell> Cells<T>(this T[,] matrix)
     {
-        int columns = matrix.GetLength(0);
-        int rows = matrix.GetLength(1);
+        int rows = matrix.GetLength(0);
+        int columns = matrix.GetLength(1);
 
         for (int i = 0; i < rows; i++)
         {
@@ -200,10 +208,4 @@ public static class Day11Extensions
 
         return input;
     }    
-}
-
-public record struct Cell
-{
-    public int Row;
-    public int Column;
 }
