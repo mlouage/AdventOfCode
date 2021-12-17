@@ -518,4 +518,24 @@ public class Tests
 
         _output.WriteLine($"Day 15 (Part 2): {solution}");
     }
+
+    [Fact]
+    public void Day16Part1ParseSinglePacketTest()
+    {        
+        var sut = new Days.Day16();
+
+        var actual = sut.Part1("D2FE28");
+
+        Assert.Equal(6, actual);        
+    }
+
+    [Fact]
+    public void Day16Part1ParsePacketWithTwoSubPacketsTest()
+    {
+        var sut = new Days.Day16();
+
+        var actual = sut.Part1("38006F45291200");
+
+        Assert.Equal(10, actual);
+    }
 }
